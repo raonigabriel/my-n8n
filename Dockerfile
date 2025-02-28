@@ -1,4 +1,4 @@
-FROM n8nio/n8n:1.80.3
+FROM n8nio/n8n:1.81.2
 
 # Change use to root to install stuff
 USER root
@@ -9,7 +9,7 @@ RUN apk add sudo shadow bash \
     gcompat libc6-compat libgcc libstdc++ ca-certificates \
 # Installs some basic tools
     docker-cli curl socat openssh-client unzip brotli zstd xz \
-    ffmpeg imagemagick
+    ffmpeg imagemagick jq
 
 # Allow sudo for user "node"
 RUN echo "node ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/nopasswd && \
@@ -32,7 +32,7 @@ RUN ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 RUN npm install -g @langchain/community @langchain/openai openai \
     youtube-transcript youtubei.js pdf-parse officeparser mammoth \
     @google/generative-ai @langchain/google-vertexai replicate \
-    @mozilla/readability jsdom ytdl-core cheerio
+    @mozilla/readability jsdom ytdl-core cheerio uuid 
 
 # Fall back user to "node"
 USER node
