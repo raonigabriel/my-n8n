@@ -21,7 +21,7 @@ RUN EXISTING_GROUP=$(getent group 999 | cut -d: -f1) && \
 # Just add the user 'node' to the group
         adduser node "$EXISTING_GROUP"; \
     else \
-# Create a new group then add the user 'node' to tha  group
+# Create a new group then add the user 'node' to that group
         addgroup -g 999 docker && adduser node docker; \
     fi
 
@@ -32,7 +32,7 @@ RUN ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 RUN npm install -g @langchain/community @langchain/openai openai \
     youtube-transcript youtubei.js pdf-parse officeparser mammoth \
     @google/generative-ai @langchain/google-vertexai replicate \
-    @mozilla/readability jsdom ytdl-core cheerio uuid 
+    @mozilla/readability jsdom ytdl-core cheerio uuid hashids
 
 # Fall back user to "node"
 USER node
