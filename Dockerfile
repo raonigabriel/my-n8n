@@ -1,4 +1,4 @@
-FROM n8nio/n8n:1.81.2
+FROM n8nio/n8n:1.82.1
 
 # Change use to root to install stuff
 USER root
@@ -32,7 +32,7 @@ RUN ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 RUN npm install -g @langchain/community @langchain/openai openai \
     youtube-transcript youtubei.js pdf-parse officeparser mammoth \
     @google/generative-ai @langchain/google-vertexai replicate \
-    @mozilla/readability jsdom ytdl-core cheerio uuid hashids
+    @mozilla/readability jsdom ytdl-core cheerio uuid hashids tiktoken
 
 # Fall back user to "node"
 USER node
