@@ -1,4 +1,4 @@
-FROM n8nio/n8n:1.88.0
+FROM n8nio/n8n:1.89.1
 
 # Change use to root to install stuff
 USER root
