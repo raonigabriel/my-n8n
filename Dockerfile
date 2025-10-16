@@ -1,4 +1,4 @@
-FROM n8nio/n8n:1.115.0
+FROM n8nio/n8n:1.115.3
 
 # Change use to root to install stuff
 USER root
@@ -34,7 +34,7 @@ RUN npm install -g @langchain/community @langchain/openai openai \
     youtube-transcript youtubei.js pdf-parse officeparser mammoth \
     @google/generative-ai @langchain/google-vertexai replicate \
     @mozilla/readability jsdom ytdl-core cheerio uuid hashids \
-    tiktoken together-ai @fal-ai/client @supabase/supabase-js
+    tiktoken together-ai @fal-ai/client @supabase/supabase-js markdown-docx
 
 # Fall back user to "node"
 USER node
