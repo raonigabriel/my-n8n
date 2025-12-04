@@ -1,4 +1,4 @@
-FROM n8nio/n8n:1.121.2
+FROM n8nio/n8n:1.123.1
 
 # Change use to root to install stuff
 USER root
@@ -6,11 +6,11 @@ USER root
 # Installs shell related tools
 RUN apk add sudo shadow bash \
 # Installs compatibility libs
-    gcompat libc6-compat libgcc libstdc++ ca-certificates \
+    gcompat libc6-compat libgcc libstdc++ ca-certificates pipx \
 # Installs some basic tools
     docker-cli curl socat openssh-client unzip brotli zstd xz \
 # Installs extra tools
-    ffmpeg imagemagick jq pigz zip libwebp-tools poppler-utils pipx
+    ffmpeg imagemagick jq pigz zip libwebp-tools poppler-utils exiftool
 
 # Allow sudo for user "node"
 RUN echo "node ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/nopasswd && \
