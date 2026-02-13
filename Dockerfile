@@ -8,7 +8,8 @@ RUN apk add --no-cache \
     sudo shadow bash \
     gcompat libc6-compat libgcc libstdc++ ca-certificates pipx \
     docker-cli curl socat openssh-client unzip brotli zstd xz \
-    ffmpeg imagemagick jq pigz zip libwebp-tools poppler-utils exiftool
+    ffmpeg imagemagick jq pigz zip libwebp-tools poppler-utils \
+    exiftool pdfgrep
 
 # Allow sudo for user "node"
 RUN echo "node ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/nopasswd && \
