@@ -1,4 +1,4 @@
-FROM n8nio/n8n:1.123.27
+FROM n8nio/n8n:1.123.28
 
 # Change user to root to install dependencies
 USER root
