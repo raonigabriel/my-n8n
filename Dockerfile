@@ -52,23 +52,21 @@ USER node
 # Make pipx-installed binaries available for the node user
 ENV PATH="/home/node/.local/bin:${PATH}"
 
+# Tell Claude Code to use the system ripgrep instead of its bundled binary.
+# Required on Alpine/musl — the bundled ripgrep is glibc-linked and won't run.
+ENV USE_BUILTIN_RIPGREP=0
+
 # ─── Python tooling ──────────────────────────────────────────────────────────────
 RUN pipx install yt-dlp
 
 # Smoke test — fails the build if yt-dlp is unreachable or PATH is misconfigured
 RUN yt-dlp --version
 
-# ─── Notes ───────────────────────────────────────────────────────────────────────
-# SSH known_hosts is intentionally NOT baked into this image.
-# Mount it at runtime instead so key rotations are handled automatically:
-#
-#   volumes:
-#     - ~/.ssh/known_hosts:/home/node/.ssh/known_hosts:ro
-#
-# Also set the following in your n8n settings.json for Claude Code on Alpine:
-#
-#   {
-#     "env": {
-#       "USE_BUILTIN_RIPGREP": "0"
-#     }
-#   }
+# ─── Trust known SSH hosts for git operations ────────────────────────────────────
+# Baked in for reliability. If a host rotates its key (e.g. GitHub did in 2023),
+# rebuild the image to pick up the new fingerprints.
+RUN mkdir -p /home/node/.ssh && \
+    ssh-keyscan -H github.com    >  /home/node/.ssh/known_hosts && \
+    ssh-keyscan -H gitlab.com    >> /home/node/.ssh/known_hosts && \
+    ssh-keyscan -H bitbucket.org >> /home/node/.ssh/known_hosts && \
+    chmod 600 /home/node/.ssh/known_hosts
