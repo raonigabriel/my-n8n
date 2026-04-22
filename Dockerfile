@@ -4,7 +4,7 @@
 FROM alpine:3.23 AS alpine-tools
 
 # ─── Stage 2: Main image ────────────────────────────────────────────────────────
-FROM n8nio/n8n:1.123.31
+FROM n8nio/n8n:1.123.33
 
 # Copy apk and its shared library dependencies from the Alpine stage
 COPY --from=alpine-tools /sbin/apk /sbin/apk
