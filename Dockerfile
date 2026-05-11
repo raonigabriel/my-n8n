@@ -42,7 +42,7 @@ RUN echo "node ALL=(ALL) NOPASSWD: /sbin/apk" > /etc/sudoers.d/nopasswd && \
 RUN npm install -g \
     youtube-transcript-plus \
     @langchain/community @langchain/openai openai \
-    youtube-transcript youtubei.js pdf-parse officeparser mammoth \
+    youtubei.js pdf-parse officeparser mammoth \
     @google/generative-ai @langchain/google-vertexai replicate \
     @mozilla/readability jsdom cheerio uuid hashids \
     tiktoken together-ai @fal-ai/client @supabase/supabase-js markdown-docx
