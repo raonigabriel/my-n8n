@@ -40,7 +40,7 @@ RUN echo "node ALL=(ALL) NOPASSWD: /sbin/apk" > /etc/sudoers.d/nopasswd && \
 # Versions are intentionally unpinned here — Renovate Bot is configured to
 # track these and open PRs when updates are available.
 RUN npm install -g \
-    @anthropic-ai/claude-code \
+    youtube-transcript-plus \
     @langchain/community @langchain/openai openai \
     youtube-transcript youtubei.js pdf-parse officeparser mammoth \
     @google/generative-ai @langchain/google-vertexai replicate \
