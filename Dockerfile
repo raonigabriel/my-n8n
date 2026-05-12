@@ -36,16 +36,14 @@ RUN echo "node ALL=(ALL) NOPASSWD: /sbin/apk" > /etc/sudoers.d/nopasswd && \
     usermod -aG docker node && \
     ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 
-# ─── Node.js AI/utility libraries ───────────────────────────────────────────────
+# ─── Node.js utility libraries ───────────────────────────────────────────────
 # Versions are intentionally unpinned here — Renovate Bot is configured to
 # track these and open PRs when updates are available.
 RUN npm install -g \
-    youtube-transcript-plus \
-    @langchain/community @langchain/openai openai \
-    youtubei.js pdf-parse officeparser mammoth \
-    @google/generative-ai @langchain/google-vertexai replicate \
+    youtube-transcript-plus youtubei.js \
+    pdf-parse officeparser mammoth \
     @mozilla/readability jsdom cheerio uuid hashids \
-    tiktoken together-ai @fal-ai/client @supabase/supabase-js markdown-docx
+    tiktoken markdown-docx
 
 USER node
 
