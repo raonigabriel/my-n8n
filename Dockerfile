@@ -50,10 +50,6 @@ USER node
 # Make pipx-installed binaries available for the node user
 ENV PATH="/home/node/.local/bin:${PATH}"
 
-# Tell Claude Code to use the system ripgrep instead of its bundled binary.
-# Required on Alpine/musl — the bundled ripgrep is glibc-linked and won't run.
-ENV USE_BUILTIN_RIPGREP=0
-
 # ─── Python tooling ──────────────────────────────────────────────────────────────
 RUN pipx install yt-dlp
 
