@@ -1,7 +1,7 @@
 # ─── Stage 1: Grab apk and its dependencies from a clean Alpine image ──────────
 # This is necessary because n8n deliberately removed apk from their hardened image
 # since v2.1.0. We copy the binaries rather than downloading them over the network.
-FROM alpine:3.23 AS alpine-tools
+FROM alpine:3.24 AS alpine-tools
 
 # ─── Stage 2: Main image ────────────────────────────────────────────────────────
 FROM n8nio/n8n:1.123.54
