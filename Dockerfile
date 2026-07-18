@@ -20,8 +20,8 @@ ARG TARGETPLATFORM
 # ─── System packages ─────────────────────────────────────────────────────────────
 # Note: no `apk upgrade` here — upgrading at build time breaks reproducibility.
 # To get security patches, bump the base image version instead.
-RUN apk add --no-cache -u \
-    sudo shadow bash curl git \
+RUN apk add --no-cache \
+    sudo shadow bash curl \
     gcompat libc6-compat libgcc libstdc++ ca-certificates pipx \
     docker-cli socat openssh-client unzip brotli zstd xz \
     ffmpeg imagemagick jq pigz zip libwebp-tools poppler-utils \
