@@ -20,12 +20,17 @@ ARG TARGETPLATFORM
 # ─── System packages ─────────────────────────────────────────────────────────────
 # Note: no `apk upgrade` here — upgrading at build time breaks reproducibility.
 # To get security patches, bump the base image version instead.
-RUN apk add --no-cache \
-    sudo shadow bash curl \
-    gcompat libc6-compat libgcc libstdc++ ca-certificates pipx \
-    docker-cli socat openssh-client unzip brotli zstd xz \
-    ffmpeg imagemagick jq pigz zip libwebp-tools poppler-utils \
-    exiftool pdfgrep tzdata ripgrep
+# We are unpinning libcurl here because the n8n image (based on dhi.io) ships old version
+RUN apk add --no-cache apk-tools && \
+    sed -i '/^libcurl/d' /etc/apk/world && \
+    apk update && \
+    apk add --no-cache --upgrade libcurl && \
+    apk add --no-cache \
+        sudo shadow bash curl \
+        gcompat libc6-compat libgcc libstdc++ ca-certificates pipx \
+        docker-cli socat openssh-client unzip brotli zstd xz \
+        ffmpeg imagemagick jq pigz zip libwebp-tools poppler-utils \
+        exiftool pdfgrep tzdata ripgrep
 
 # ─── System configuration (sudoers + docker group + timezone) ───────────────────
 # sudo is scoped to /sbin/apk only — the node user needs passwordless apk access
