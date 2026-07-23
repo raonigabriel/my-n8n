@@ -20,9 +20,9 @@ ARG TARGETPLATFORM
 # ─── System packages ─────────────────────────────────────────────────────────────
 # Note: no `apk upgrade` here — upgrading at build time breaks reproducibility.
 # To get security patches, bump the base image version instead.
-# We are unpinning libcurl here because the n8n image (based on dhi.io) ships old version
-RUN apk add --no-cache apk-tools && \
-    sed -i '/^libcurl/d' /etc/apk/world && \
+# We are unpinning libcurl and libapk2 because the n8n image (based on dhi.io) ships with old versions
+RUN sed -i -e '/^libcurl/d' -e '/^libapk2/d' /etc/apk/world && \
+    apk add --no-cache apk-tools && \
     apk update && \
     apk add --no-cache --upgrade libcurl && \
     apk add --no-cache \
