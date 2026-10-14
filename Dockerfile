@@ -21,7 +21,15 @@ ARG TARGETPLATFORM
 # Note: no `apk upgrade` here — upgrading at build time breaks reproducibility.
 # To get security patches, bump the base image version instead.
 # We are unpinning libcurl and libapk2 because the n8n image (based on dhi.io) ships with old versions
-RUN sed -i -e '/^libcurl/d' -e '/^libapk2/d' /etc/apk/world && \
+# The DHI base ships a legacy apk-v2 scripts.tar whose tar member names embed base64
+# checksums that may contain '/'. apk-tools >= 3.0.8 (alpine 3.24.2+) rejects any tar
+# member name containing '/' as a malicious path, aborting the database open with
+# "file format is invalid or inconsistent". Its entries belong to packages already
+# installed in the base (busybox/ca-certificates/openssh-server) and are only needed
+# when re-running *their* scripts; new packages carry their own scripts, so dropping
+# the file is safe. apk rewrites scripts.tar (hex names) on its first commit.
+RUN rm -f /lib/apk/db/scripts.tar && \
+    sed -i -e '/^libcurl/d' -e '/^libapk2/d' /etc/apk/world && \
     apk add --no-cache apk-tools && \
     apk update && \
     apk add --no-cache --upgrade libcurl && \
